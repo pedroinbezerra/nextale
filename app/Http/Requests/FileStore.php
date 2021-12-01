@@ -25,14 +25,11 @@ class FileStore extends FormRequest
      */
     public function rules()
     {
-        $MAX_FILE_SIZE = env('MAX_FILE_UPLOAD_SIZE');
-        $ALLOWED_EXTENSIONS = env('ALLOWED_EXTENSIONS');
-
         return [
             'fk_tale_id' => 'required|int',
             'title' => 'required|string',
             'is_enabled' => 'required|boolean',
-            'file' => "required|mimes:$ALLOWED_EXTENSIONS|max:$MAX_FILE_SIZE",
+            'file' => "required",
         ];
     }
 

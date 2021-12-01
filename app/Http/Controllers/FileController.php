@@ -19,6 +19,19 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
+        $MAX_FILE_SIZE = env('MAX_FILE_UPLOAD_SIZE');
+        $type = explode('/', $_FILES['file']['type'])[0];
+
+        if (($type != 'image' && $type != 'video' && $type != 'audio') || ($_FILES['file']['size'] / 1024 > $MAX_FILE_SIZE)) {
+            return response(
+                [
+                    'status' => 'error',
+                    'message' => "Invalid file. Accepted only video, image or audio less than $MAX_FILE_SIZE kb",
+                ],
+                400
+            );
+        }
+
         //store file into document folder
         $fileUrl = $request->file->store(env('STORE_FILE_FOLDER'));
 
@@ -62,8 +75,8 @@ class FileController extends Controller
         $fileUrl = DB::table('files')
             ->select('fileUrl')
             ->where('id', $id)
-            ->get();    
-   
+            ->get();
+
         Storage::delete($fileUrl[0]->fileUrl);
 
         return DB::table('files')->where('id', '=', $id)->delete();
