@@ -72,39 +72,53 @@ http://localost:8000
 
 Cada endpoint abaixo executa uma ação específica.
 
-- Cadastra um conto
-**POST** http://127.0.0.1:8000/api/tale
-**BODY: JSON**
+- Cadastra um conto <br>
+**POST** http://127.0.0.1:8000/api/tale<br>
+**BODY: JSON**<br>
 > "title": "Titulo",
-> 	"body": "Descrição",
+> "body": "Descrição",
 > "is_enabled": true
 
-- Exibe todos os contos cadastrados por ordem de cadastro
-**GET** http://127.0.0.1:8000/api/tale
+<br><br>
 
-- Exibe um conto por id
+- Exibe todos os contos cadastrados por ordem de cadastro<br>
+**GET** http://127.0.0.1:8000/api/tale
+<br><br>
+
+- Exibe um conto por id<br>
 **GET** http://127.0.0.1:8000/api/tale/:id
 
-- Altera os dados de um conto por id
-**PATCH** http://127.0.0.1:8000/api/tale/:id
-**BODY: JSON**
+<br><br>
+
+- Altera os dados de um conto por id<br>
+**PATCH** http://127.0.0.1:8000/api/tale/:id<br>
+**BODY: JSON**<br>
 > "title": "Titulo",
-> 	"body": "Descrição",
+> "body": "Descrição",
 > "is_enabled": true
 
-- Exclui um conto por id
+<br><br>
+
+
+- Exclui um conto por id<br>
 **DELETE** http://127.0.0.1:8000/api/tale/:id
 
-- Faz o upload de uma midia
-**POST** http://127.0.0.1:8000/api/file/:id
-**BODY: MULTIPART**
+<br><br>
+
+- Faz o upload de uma midia<br>
+**POST** http://127.0.0.1:8000/api/file/:id<br>
+**BODY: MULTIPART**<br>
 > "file" : "File.png",
 > "fk_tale_id" : 1,
 > "title": "Titulo",
 > "is_enabled": 1
 
-- Exibe a url de uma midia por id
-**GET** http://127.0.0.1:8000/api/file/:id
+<br><br>
 
-- Excluia uma midia por id
+- Exibe a url de uma midia por id<br>
+**GET** http://127.0.0.1:8000/api/file/:id<br>
+
+<br><br>
+
+- Excluia uma midia por id<br>
 **DELETE** http://127.0.0.1:8000/api/file/:id
