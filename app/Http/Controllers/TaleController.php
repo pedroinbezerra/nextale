@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\TaleRequest;
+use App\Http\Requests\TaleStore;
+use Error;
+use Illuminate\Support\Facades\DB;
 
 class TaleController extends Controller
 {
@@ -15,17 +17,9 @@ class TaleController extends Controller
      */
     public function index()
     {
-        return 'Welcome to Nextale API!';
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        //
+        return DB::table('tales')
+            ->orderBy('created_at', 'asc')
+            ->get();
     }
 
     /**
@@ -34,9 +28,17 @@ class TaleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaleRequest $request)
+    public function store(TaleStore $request)
     {
-        return "Success";
+        return response(
+            DB::table('tales')->insert([
+                'title' => $request->title,
+                'body' => $request->body,
+                'is_enabled' => $request->is_enabled,
+                'created_at' => now(env('TIMEZONE'))
+            ]),
+            201
+        );
     }
 
     /**
@@ -45,21 +47,11 @@ class TaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        return DB::table('tales')->find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,9 +60,15 @@ class TaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaleStore $request, $id)
     {
-        //
+        DB::table('tales')
+            ->where('id', $id)
+            ->update([
+                'title' => $request->title,
+                'body' => $request->body,
+                'is_enabled' => $request->is_enabled,
+            ]);
     }
 
     /**
@@ -81,6 +79,6 @@ class TaleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return DB::table('tales')->where('id', '=', $id)->delete();
     }
 }

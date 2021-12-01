@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class TaleRequest extends FormRequest
+class TaleStore extends FormRequest
 {
     // /**
     //  * Determine if the user is authorized to make this request.
@@ -28,9 +28,7 @@ class TaleRequest extends FormRequest
         return [
             'title' => 'required|string',
             'body' => 'required|string',
-            'is_enabled' => 'required|boolean',
-            'created_at' => 'required|date_format:Y-m-d H:i:s',
-            'updated_at' => 'required|date_format:Y-m-d H:i:s'
+            'is_enabled' => 'required|boolean'
         ];
     }
 
