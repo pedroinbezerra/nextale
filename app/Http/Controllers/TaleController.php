@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Http\Requests\TaleStore;
-use Error;
 use Illuminate\Support\Facades\DB;
 
 class TaleController extends Controller
