@@ -120,5 +120,5 @@ Cada endpoint abaixo executa uma ação específica.
 
 <br><br>
 
-- Excluia uma midia por id<br>
+- Exclui uma midia por id<br>
 **DELETE** http://127.0.0.1:8000/api/file/:id
